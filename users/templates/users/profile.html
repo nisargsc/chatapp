@@ -1,0 +1,12 @@
+{% extends "chat/base.html" %}
+{% block content %}
+    <h1>Profile Page</h1>
+
+    <div class="border-top pt-3">
+        <h4>Username- {{ user }}</h4>
+        <small class="text-muted">
+            <a href="{% url 'chat-home' %}">Back to Chat</a>
+        </small>
+    </div>
+
+{% endblock content %}

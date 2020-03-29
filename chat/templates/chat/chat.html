@@ -1,5 +1,24 @@
 {% extends "chat/base.html" %}
 {% block content %}
     <h1>Chat Page</h1>
-    <a href="{% url 'logout' %}">Log Out</a>
+
+    <div>
+        {% for chat in chats %}
+            <article class="media content-section">
+                <div class="media-body">
+                    <div class="article-metadata">
+                        <a class="mr-2" href="#">from {{ chat.from_whom }} to {{ chat.to_whom }} </a>
+                        <small class="text-muted">{{ chat.date_posted|date:"F d, Y" }}</small>
+                    </div>
+                    <p class="article-content">{{ chat.content }}</p>
+                </div>
+            </article>
+        {% endfor %}
+    </div>
+
+    <div class="border-top pt-3">
+        <small class="text-muted">
+            <a href="{% url 'logout' %}">Log Out</a>
+        </small>
+    </div>
 {% endblock content %}
