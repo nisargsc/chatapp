@@ -1,20 +1,30 @@
 {% extends "chat/base.html" %}
+{% load crispy_forms_tags %}
 {% block content %}
     <h1>Chat Page</h1>
 
-    <div>
-        {% for chat in chats %}
-            <article class="media content-section">
-                <div class="media-body">
-                    <div class="article-metadata">
-                        <a class="mr-2" href="#">from {{ chat.from_whom }} to {{ chat.to_whom }} </a>
-                        <small class="text-muted">{{ chat.date_posted|date:"F d, Y" }}</small>
-                    </div>
-                    <p class="article-content">{{ chat.content }}</p>
-                </div>
-            </article>
-        {% endfor %}
-    </div>
+    {% for chat in chats %}
+    <article class="media content-section">
+        <div class="media-body">
+            <div class="article-metadata">
+                <a class="mr-2" href="#">from {{ chat.from_whom }} to {{ chat.to_whom }} </a>
+                <small class="text-muted">{{ chat.date_posted }}</small>
+            </div>
+            <p class="article-content">{{ chat.content }}</p>
+        </div>
+    </article>
+    {% endfor %}
+
+    <form method="POST">
+        {% csrf_token %}
+        <fieldset class="form-group">
+            <legend class="border-bottom mb-4">Chat</legend>
+            {{ form |crispy}}
+        </fieldset>
+        <div class="form-group">
+            <button class="btn btn-outline-info" type="submit">Send</button>
+        </div>
+    </form>
 
     <div class="border-top pt-3">
         <small class="text-muted">
